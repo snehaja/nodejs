@@ -22,10 +22,8 @@ module.exports = {
     },
      get_free_workers(req,res)
      {   
-        avail_status = req.params.avail;
-        console.log(avail_status);
          worker.findAll({
-             where: {avail:avail_status}
+             where: {avail:"1"}
          })
          .then(workers=>res.json({
              error:false,
@@ -46,17 +44,18 @@ module.exports = {
        user.update(
            {
               worker_name:updated_worker_name,
-              status:1
+              status:"1"
             },
               { where:{} 
             })     
        .then(worker.update(
            {
-             avail:0,
-             request_id:assigned_req_id
+             avail:"0",
+             request_id:assigned_req_id,
+             worker_name:updated_worker_name
             }
              ,
-             {where:{worker_name:updated_worker_name}})
+             {where:{}})
              .then(update=>res.json({
                 error:false,
                 message:'worker alloted'
