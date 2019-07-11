@@ -1,3 +1,4 @@
+
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
@@ -8,28 +9,30 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      address:{
+      address: {
         type: Sequelize.STRING
       },
-      avail:{
-        type: Sequelize.INTEGER
+      avail: {
+        type: Sequelize.INTEGER,
+        defaultValue:"1"
       },
-      email:{
+      email: {
         type: Sequelize.STRING
       },
       name: {
         type: Sequelize.STRING
       },
-      number:{
-        type: Sequelize.INTEGER
+      number: {
+        type: Sequelize.STRING
+      },      
+      request_id: {
+        type: Sequelize.INTEGER,
+        defaultValue:"0"
       },
-      request_id:{
-        type: Sequelize.INTEGER
-      },
-      worker_username:{
+      worker_username: {
         type: Sequelize.STRING
       },
-      worker_pswd:{
+      worker_pswd: {
         type: Sequelize.STRING
       },
       createdAt: {
@@ -46,3 +49,4 @@ module.exports = {
     return queryInterface.dropTable('Workers');
   }
 };
+
