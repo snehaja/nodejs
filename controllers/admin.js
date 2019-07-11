@@ -35,32 +35,40 @@ module.exports = {
              error:error
          }))
      },
-   allot_worker(req,res)//route handler
+    allot_worker(req,res)//route handler
     {
        const updated_worker_name = req.params.worker_name;
-       const assigned_req_id=req.params.id; 
+       const assigned_req_id=req.params.id;
+       const worker_id = req.params.id;
        user.update(
            {
               worker_name:updated_worker_name,
               status:"1"
             },
-              { where:{id:assigned_req_id} 
-            })     
+              { where:{id:assigned_req_id}
+            })
        .then(worker.update(
            {
              avail:"0",
              request_id:assigned_req_id
-            }
-             ,
+            },
              {where:{name:updated_worker_name}})
-             .then(update=>res.json({
-                error:false,
-                message:'worker alloted'
-            })))
-       .catch(error=>res.json({
-           error:true,
-           error:error
-       }))
+             
+             .then(acknowledge.create(
+                 {
+                    ack_request_id:assigned_req_id,
+                    ack_worker_id:worker_id
+                 },
+                 { where:{}})
+                   
+                 .then(update=>res.json({
+                    error:false,
+                    message:'worker alloted and ack added'
+                }))))
+        .catch(error=>res.json({
+                  error:true,
+                 error:error
+                  }))
     },
 
 }
