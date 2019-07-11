@@ -35,27 +35,24 @@ module.exports = {
              error:error
          }))
      },
-    allot_worker(req,res)//route handler
+   allot_worker(req,res)//route handler
     {
        const updated_worker_name = req.params.worker_name;
-       console.log(updated_worker_name);
-       const assigned_req_id=req.params.request_id;
-       console.log(assigned_req_id);
+       const assigned_req_id=req.params.id; 
        user.update(
            {
               worker_name:updated_worker_name,
               status:"1"
             },
-              { where:{} 
+              { where:{id:assigned_req_id} 
             })     
        .then(worker.update(
            {
              avail:"0",
-             request_id:assigned_req_id,
-             worker_name:updated_worker_name
+             request_id:assigned_req_id
             }
              ,
-             {where:{}})
+             {where:{name:updated_worker_name}})
              .then(update=>res.json({
                 error:false,
                 message:'worker alloted'
