@@ -7,7 +7,7 @@ module.exports = (app)=>
 
     app.get('/admin/getfreeworkers/:name',admincontroller.get_free_workers);
 
-    app.put('/admin/allotworker/:worker_name/:request_id',admincontroller.allot_worker);
+    app.put('/admin/allotworker/:worker_name/:id/:id',admincontroller.allot_worker);
 
     app.post('/admin/addworker',admincontroller.create);
     
