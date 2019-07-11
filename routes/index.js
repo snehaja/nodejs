@@ -1,5 +1,6 @@
 const admincontroller = require('../controllers').admin;
 const usercontroller = require('../controllers').user;
+const workercontroller = require('../controllers').worker;
 
 module.exports = (app)=>
  {
