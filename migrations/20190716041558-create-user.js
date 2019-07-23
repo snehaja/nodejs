@@ -23,8 +23,12 @@ module.exports = {
       number: {
         type: Sequelize.STRING
       },
+      priority:{
+        type: Sequelize.STRING
+      },     
       status: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        defaultValue:"0"
       },
       worker_name: {
         type: Sequelize.STRING
@@ -43,3 +47,4 @@ module.exports = {
     return queryInterface.dropTable('Users');
   }
 };
+
